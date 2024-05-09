@@ -6,7 +6,7 @@ const redis = new Redis(`${REDIS_URL}`);
 
 class Cache {
     async get(key) {
-        if (!key.startsWith('jig://') && !key.startsWith('berry://')) return;
+        if (!key.startsWith('jig://') && !key.startsWith('berry://') && !key.startsWith('gop://')) return;
 
         let valueString = await redis.get(key);
         if (valueString) {
@@ -15,7 +15,7 @@ class Cache {
     }
 
     async set(key, value) {
-        if (!key.startsWith('jig://') && !key.startsWith('berry://')) return;
+        if (!key.startsWith('jig://') && !key.startsWith('berry://') && !key.startsWith('gop://')) return;
 
         const valueString = JSON.stringify(value);
         await redis.set(key, valueString);
